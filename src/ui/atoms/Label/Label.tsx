@@ -3,9 +3,7 @@ import React from 'react';
 import { ILabelProps } from '@/models/atoms/Label';
 
 const StyledLabel = styled.label`
-  font-weight: bold;  
   color: #000;         
-  margin-bottom: 8px; 
   display: block;      
 `;
 

@@ -2,10 +2,11 @@
 import styled from "styled-components";
 import { LuBriefcase, LuBuilding2 } from "react-icons/lu";
 import { GrAddCircle } from "react-icons/gr";
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../atoms/Button/Button";
 import Input from "@/ui/atoms/Input/Input";
 import { IHeaderProps } from "@/models/organisms/Header";
+import Modal from "../Modals/Modals";
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -61,13 +62,30 @@ const AddButtonContainer = styled.div`
   justify-content: start;
 `;
 
+const ModalContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
 const Header: React.FC<IHeaderProps> = ({
   onToggleTheme,
   isView,
 }) => {
+  const [showModal, setShowModal] = useState(false);
 
   const goLeft = isView == 'vacantes' ? '100px' : '0';
   const goRight = isView == 'vacantes' ? '-100px' : '0';
+
+  const handleCloseModal = () => {
+    console.log("close");
+    setShowModal(false);
+  };
 
   return (
     <HeaderContainer>
@@ -93,7 +111,7 @@ const Header: React.FC<IHeaderProps> = ({
           </Toggler>
         </ToggleContainer>
         <SearchContainer>
-          <Input name="search" value={""} type="text" placeholder="⌕ Buscar..." />
+          <Input className="search-input" name="search" value={""} type="text" placeholder="⌕ Buscar..." />
         </SearchContainer>
       </HeaderSection>
       <HeaderSection>
@@ -104,9 +122,16 @@ const Header: React.FC<IHeaderProps> = ({
               type="button"
               label={isView === "companies" ? 'Agregar Compañia' : 'Agregar Vacante' }
               icon={<GrAddCircle />}
-              onClick={() => onToggleTheme()}
+              onClick={() => setShowModal(true)}
             />
             </AddButtonContainer>
+            {showModal && (
+            <ModalContainer>
+              <Modal 
+              isOpen={showModal} onClose={handleCloseModal} isView={isView}
+              />
+            </ModalContainer>
+          )}
       </HeaderSection>
     </HeaderContainer>
   );

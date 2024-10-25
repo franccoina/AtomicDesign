@@ -1,7 +1,13 @@
+import React from "react";
+
+type ButtonType = "button" | "submit" | "reset";
+
 export interface IButtonProps {
-    type: "button";
-    icon?: React.JSX.Element;
-    onClick?: () => void;
-    className?: string;
-    label?: string;
+  type?: ButtonType;
+  icon?: React.ReactNode;
+  children?: React.ReactNode;
+  className?: string;
+  disabled?: boolean; 
+  label?: string;
+  onClick?: () => void;
 }

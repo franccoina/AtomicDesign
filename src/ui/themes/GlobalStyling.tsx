@@ -34,6 +34,7 @@ export const GlobalTheme: IGlobalTheme = {
         bgBtn: 'rgb(236, 72, 153) ',
         hoverBtn: 'rgb(219, 39, 119)',
         bgInactive: 'rgb(243, 244, 246)',
+        bgPagination: 'rgb(229, 231, 235)',
         borders: 'rgb(229, 231, 235) ',
     }
 };
@@ -56,6 +57,7 @@ export const GlobalDarkTheme: IGlobalTheme = {
         bgBtn: 'rgb(168, 85, 247)',
         hoverBtn: 'rgb(147, 51, 234)',
         bgInactive: 'rgb(243, 244, 246)',
+        bgPagination: 'rgb(229, 231, 235)',
         borders: 'rgb(229, 231, 235) ',
     }
 }
@@ -74,6 +76,7 @@ export const GlobalStyle = createGlobalStyle`
 
     --bgBtn: ${({ theme }) => theme.colors.bgBtn};
     --bgInactive: ${({ theme }) => theme.colors.bgInactive};
+    --bgPagination: ${({ theme }) => theme.colors.bgPagination};
 
     --textTertiary: ${({ theme }) => theme.colors.textTertiary};
     --hoverTertiary: ${({ theme }) => theme.colors.hoverTertiary};

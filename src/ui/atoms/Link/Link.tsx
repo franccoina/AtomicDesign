@@ -6,9 +6,9 @@ import { ILinkProps } from '@/models/atoms/Link';
 
 const StyledLink = styled(Link)`
     text-decoration: none;
-    padding: 15px;
+    padding: 10px;
     margin: 0;
-    color: ${({ theme }) => theme.colors.textWhite};
+    color: ${({ theme }) => theme.colors.textPrimary};
     font-weight: 400;
     transition: 0.4s;
 
