@@ -47,7 +47,7 @@ const Form: React.FC<IFormProps> = ({ onSubmit, title }) => {
         <StyledForm onSubmit={handleSubmit}>
             <StyledFormTitle>{title}</StyledFormTitle>
             <FormInput
-                text="Título" htmlFor="title" className="" placeholder="Título" type="text"
+                text="Título" htmlFor="title" className="modal-input" placeholder="Título" type="text"
                 name="title" value={''} onChange={handleChange} />
             <FormTextarea
                 text="Descripción" htmlFor="title" className="" placeholder="Descripción"
