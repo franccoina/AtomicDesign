@@ -113,11 +113,15 @@ p, li, label {
 }
 
 .modal-input{
-    border-radius: 10px;
+  & input {
+        border-radius: 10px;
+  }
 }
 
 .search-input{
-    border-radius: 50px;
+     & input {
+        border-radius: 50px;
+  }
 }
 
 .editBtn {
