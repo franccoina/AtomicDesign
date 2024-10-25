@@ -1,12 +1,8 @@
-"use server"
-
 const Home = () => {
-  return (
-    <main className="">
-      <div className="">
-      </div>
-    </main>
-  );
-}
+  return(
+    <div>
+    </div>
+  )
+};
 
 export default Home;
