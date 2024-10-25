@@ -111,7 +111,7 @@ const Header: React.FC<IHeaderProps> = ({
           </Toggler>
         </ToggleContainer>
         <SearchContainer>
-          <Input name="search" value={""} type="text" placeholder="⌕ Buscar..." />
+          <Input className="search-input" name="search" value={""} type="text" placeholder="⌕ Buscar..." />
         </SearchContainer>
       </HeaderSection>
       <HeaderSection>
