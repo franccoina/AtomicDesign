@@ -12,3 +12,7 @@ export interface IVacancies {
     id:          string;
     companyId:   string;
 }
+
+export interface ICardProps {
+    $data?: IVacancies | ICompany;
+}

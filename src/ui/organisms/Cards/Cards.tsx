@@ -1,4 +1,4 @@
-import { ICompany, IVacancies } from "@/models/organisms/Cards";
+import { ICompany, IVacancies, ICardProps } from "@/models/organisms/Cards";
 import styled from "styled-components";
 import { LuPencil, LuTrash2 } from "react-icons/lu";
 import { CardContent } from "@/ui/molecules/CardContent/CardContent";
@@ -31,11 +31,6 @@ const ButtonsContainer = styled.div`
     gap: 6px;
     justify-content: end;
 `;
-
-
-interface ICardProps {
-    $data?: IVacancies | ICompany;
-}
 
 export const Card = ({ $data }: ICardProps) => {
     const isVacancy = ($data: IVacancies | ICompany): $data is IVacancies => {
