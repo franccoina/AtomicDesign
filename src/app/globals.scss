@@ -112,6 +112,14 @@ p, li, label {
   }
 }
 
+.modal-input{
+    border-radius: 10px;
+}
+
+.search-input{
+    border-radius: 50px;
+}
+
 .editBtn {
   color: var(--textQuaternary);
   border: 1px solid var(--borders);
