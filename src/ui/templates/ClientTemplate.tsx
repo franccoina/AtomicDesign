@@ -14,7 +14,7 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
   const fetchCardData = async () => {
     try {
       const response = await fetch(
-        view === "vacantes"
+        view === "vacancies"
           ? "https://671638f633bc2bfe40bcf693.mockapi.io/api/v1/vacancies"
           : "https://671638f633bc2bfe40bcf693.mockapi.io/api/v1/companies"
       );
@@ -32,7 +32,7 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
   }, [view]);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const totalPages = 2;
+  const totalPages = 4;
 
   const handleNext = () => {
     if (currentPage < totalPages) {

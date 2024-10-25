@@ -35,10 +35,6 @@ Installation
 git clone https://github.com/franccoina/AtomicDesign
 ```
 
-```bash
-cd atomic
-```
-
 - Install the dependencies:
 
 ```bash

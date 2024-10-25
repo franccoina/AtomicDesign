@@ -30,7 +30,7 @@ h6 {
   font-weight: bolder;
 }
 
-p, li, label {
+p, li, label, select, textarea{
   color: var(--textPrimary);
   line-height: 1.5;
   font-weight: 300;
@@ -42,7 +42,7 @@ p, li, label {
 }
 
 .layout {
-  height: auto;
+  height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
@@ -112,14 +112,14 @@ p, li, label {
   }
 }
 
-.modal-input{
-  & input {
-        border-radius: 10px;
+.modal-fields{
+  & input, textarea, select {
+    border-radius: 10px;
   }
 }
 
 .search-input{
-     border-radius: 50px;
+  border-radius: 50px;
 }
 
 .editBtn {
@@ -141,3 +141,4 @@ p, li, label {
   width: 30px;
   height: 30px;
 }
+

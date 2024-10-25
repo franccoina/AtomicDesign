@@ -43,7 +43,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, isView, onClose }) => {
             <ModalContent>
                 <Button type="button" icon={"X"} onClick={onClose} />
                 <Form onSubmit={() => handleSubmit}
-                    title={isView === "companies" ? 'Agregar Compañia' : 'Agregar Vacante'}
+                    isView={isView}
                 />
             </ModalContent>
         </ModalOverlay>

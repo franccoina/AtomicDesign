@@ -79,8 +79,8 @@ const Header: React.FC<IHeaderProps> = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
 
-  const goLeft = isView == 'vacantes' ? '100px' : '0';
-  const goRight = isView == 'vacantes' ? '-100px' : '0';
+  const goLeft = isView == 'vacancies' ? '100px' : '0';
+  const goRight = isView == 'vacancies' ? '-100px' : '0';
 
   const handleCloseModal = () => {
     console.log("close");
@@ -95,8 +95,8 @@ const Header: React.FC<IHeaderProps> = ({
             <Button
               className="inactiveBtn"
               type="button"
-              label={isView === "vacantes" ? 'Compañias' : 'Vacantes' }
-              icon={isView === "vacantes" ?  <LuBuilding2 /> : <LuBriefcase />}
+              label={isView === "vacancies" ? 'Compañias' : 'Vacantes' }
+              icon={isView === "vacancies" ?  <LuBuilding2 /> : <LuBriefcase />}
               onClick={() => onToggleTheme()}
             />
           </Toggler>
