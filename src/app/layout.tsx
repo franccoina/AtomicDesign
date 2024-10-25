@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import ClientLayout from "@/ui/layouts/ClientLayout";
-import "./globals.css";
+import ClientTemplate from "@/ui/templates/ClientTemplate";
+import "./globals.scss";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,7 +26,9 @@ export default function RootLayout({
         className={urbanist.className}
       >
         <ClientLayout>
-          {children}
+          <ClientTemplate>
+            {children}
+          </ClientTemplate>
         </ClientLayout>
         <ToastContainer />
       </body>
