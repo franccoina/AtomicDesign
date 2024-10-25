@@ -1,36 +1,35 @@
 'use client';
 import { ThemeProvider } from "styled-components";
-import { GlobalStyle } from "../theme/GlobalStyling";
+import { GlobalStyle } from "../themes/GlobalStyling";
 import React, { useState } from "react";
-import Header from "../molecules/Header";
+import Header from "../organisms/Header/Header";
 import { getTheme, toggleTheme } from "@/utils/useTheme";
-import styled from "styled-components";
-
-const Main = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff;
-  border-radius: 20px;
-`;
+import ClientTemplate from "../templates/ClientTemplate";
 
 const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [isDarkTheme, setIsDarkTheme] = useState(false);
+    const [isView, setIsView] = useState("");
+    const [view, setView] = useState("vacantes");
 
-    const handleToggleTheme = () => {
-        setIsDarkTheme(prev => toggleTheme(prev));
+    const handleToggle = () => {
+        setView(prev => (prev === "vacantes" ? "companies" : "vacantes"));
+        setIsView(prev => toggleTheme(prev)); 
     };
 
-    const theme = getTheme(isDarkTheme);
+    const theme = getTheme(isView);
+    
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <Main>
-                <Header onToggleTheme={handleToggleTheme} isDarkTheme={isDarkTheme} />
-                {children}
-            </Main>
+            <div className="layout">
+                <h1>Panel de Administración</h1>
+                <Header 
+                    onToggleTheme={handleToggle}
+                    isView={isView} 
+                />
+                <ClientTemplate view={view}>
+                    {children}
+                </ClientTemplate>
+            </div>
         </ThemeProvider>
     );
 };
