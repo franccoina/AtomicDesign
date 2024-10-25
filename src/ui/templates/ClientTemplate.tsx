@@ -14,7 +14,7 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
   const fetchCardData = async () => {
     try {
       const response = await fetch(
-        view === "vacantes"
+        view === "vacancies"
           ? "https://671638f633bc2bfe40bcf693.mockapi.io/api/v1/vacancies"
           : "https://671638f633bc2bfe40bcf693.mockapi.io/api/v1/companies"
       );
