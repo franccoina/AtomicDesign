@@ -1,17 +1,9 @@
 "use client";
-"use client";
 import React, { useEffect, useState } from "react";
 import { ICompany, IVacancies } from "@/models/organisms/Cards";
 import { Card } from "../organisms/Cards/Cards";
 import Pagination from "../molecules/Pagination/Pagination";
-import Pagination from "../molecules/Pagination/Pagination";
 
-const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
-  children,
-  view,
-}) => {
-  const [cardData, setCardData] = useState<Array<ICompany | IVacancies>>([]);
-  const [loading, setLoading] = useState(true);
 const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
   children,
   view,
@@ -40,25 +32,7 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
   }, [view]);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const totalPages = 2;
-
-  const handleNext = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-  useEffect(() => {
-    fetchCardData();
-  }, [view]);
-
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const totalPages = 2;
+  const totalPages = 4;
 
   const handleNext = () => {
     if (currentPage < totalPages) {
@@ -73,29 +47,7 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
   };
 
   console.log(view, cardData);
-  console.log(view, cardData);
 
-  return (
-    <main className="template">
-      {loading ? (
-        <p>Cargando...</p>
-      ) : (
-        <>
-          <div className="cards-list">
-            {cardData.map((item) => (
-              <Card $data={item} key={item.id} />
-            ))}
-          </div>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-          />
-        </>
-      )}
-    </main>
-  );
   return (
     <main className="template">
       {loading ? (

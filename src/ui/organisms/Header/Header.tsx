@@ -87,11 +87,6 @@ const Header: React.FC<IHeaderProps> = ({
     setShowModal(false);
   };
 
-  const handleCloseModal = () => {
-    console.log("close");
-    setShowModal(false);
-  };
-
   return (
     <HeaderContainer>
       <HeaderSection>

@@ -3,10 +3,8 @@ import styled from "styled-components";
 const StyledSelect = styled.select`
   border: 1px solid ${({ theme }) => theme.colors.borders};
   padding: 10px;
-  border-radius: 10px;
   width: 100%;
   box-sizing: border-box;
-  font-size: 14px;
   color: ${({ theme }) => theme.colors.textPrimary};
 `;
 

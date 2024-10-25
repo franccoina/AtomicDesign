@@ -47,35 +47,32 @@ const Form: React.FC<IFormProps> = ({ onSubmit, isView }) => {
             {isView === "companies" ? (
                 <>
                     <FormInput
-                        text="Título" htmlFor="title" className="" placeholder="Título" type="text"
+                        text="Título" htmlFor="title" className="modal-fields" placeholder="Título" type="text"
                         name="title" value={''} onChange={handleChange} />
                     <FormTextarea
-                        text="Descripción" htmlFor="title" className="" placeholder="Descripción"
+                        text="Descripción" htmlFor="title" className="modal-fields" placeholder="Descripción"
                         name="description" value={''} onChange={handleChange} />
                     <FormSelect
-                        text="Estado" htmlFor="status" className="" options={['OPEN', 'CLOSE']}
+                        text="Estado" htmlFor="status" className="modal-fields" options={['OPEN', 'CLOSE']}
                         name="status" value={''} onChange={handleChange} />
                     <FormSelect
-                        text="Compañia" htmlFor="company" className="" options={['Selecciona una compañía', 'Compañía 1', 'Compañia 2', 'Compañia 3']}
+                        text="Compañia" htmlFor="company" className="modal-fields" options={['Selecciona una compañía', 'Compañía 1', 'Compañia 2', 'Compañia 3']}
                         name="company" value={''} onChange={handleChange} />
                 </>
             ) : (
                 <>
                     <FormInput
-                        text="Título" htmlFor="title" className="" placeholder="Título" type="text"
-                        name="title" value={''} onChange={handleChange} />
-                    <FormTextarea
-                        text="Descripción" htmlFor="title" className="" placeholder="Descripción"
-                        name="description" value={''} onChange={handleChange} />
-                    <FormSelect
-                        text="Estado" htmlFor="status" className="" options={['OPEN', 'CLOSE']}
-                        name="status" value={''} onChange={handleChange} />
-                    <FormSelect
-                        text="Compañia" htmlFor="company" className="" options={['Selecciona una compañía', 'Compañía 1', 'Compañia 2', 'Compañia 3']}
-                        name="company" value={''} onChange={handleChange} />
+                        text="Nombre" htmlFor="name" className="modal-fields" placeholder="Nombre" type="text"
+                        name="name" value={''} onChange={handleChange} />
+                    <FormInput
+                        text="Ubicación" htmlFor="location" className="modal-fields" placeholder="Ubicación" type="text"
+                        name="location" value={''} onChange={handleChange} />
+                    <FormInput
+                        text="Contacto" htmlFor="contact" className="modal-fields" placeholder="Contacto" type="text"
+                        name="contact" value={''} onChange={handleChange} />
                 </>
             )}
-            <Button className='submitBtn' type='submit' label="Submit" />
+            <Button className='submitBtn' type='submit' label="Agregar" />
         </StyledForm>
     );
 };

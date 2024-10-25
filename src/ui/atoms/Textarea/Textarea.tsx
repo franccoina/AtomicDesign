@@ -6,7 +6,6 @@ const TextareaStyle = styled.input`
     height: 80px;        
     padding: 10px;        
     border: 1px solid ${({ theme }) => theme.colors.borders};
-    border-radius: 10px;
     
     &:focus {
         outline: none;          
