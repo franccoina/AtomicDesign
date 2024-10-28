@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 
-const TextareaStyle = styled.input`
+const TextareaStyle = styled.textarea`
     width: 100%;  
     height: 80px;        
     padding: 10px;        
@@ -18,7 +18,7 @@ const TextareaStyle = styled.input`
 `;
 
 export interface ITextAreaProps {
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     name: string;
     placeholder?: string;
     className?: string;

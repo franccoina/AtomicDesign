@@ -51,8 +51,8 @@ export const Card = ({ $data, isView }: ICardProps) => {
                     <CardContent
                         $text={[
                             `Description: ${($data as IVacants).description}`,
-                            `State: ${($data as IVacants).status}`,
-                            `Company: ${($data as IVacants).company?.id}`,
+                            `Status: ${($data as IVacants).status}`,
+                            `Company: ${($data as IVacants).company?.name}`,
                         ]}
                     />
                 </ul>
