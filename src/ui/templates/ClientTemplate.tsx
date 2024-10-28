@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ICompany, IVacants, IVacancyResponse } from "@/models/organisms/Cards";
+import { ICompany, IVacants, IResponse } from "@/models/organisms/Cards";
 import { Card } from "../organisms/Cards/Cards";
 import Pagination from "../molecules/Pagination/Pagination";
 
@@ -32,7 +32,6 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
   }, [view]);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const totalPages = 4;
   const totalPages = 4;
 
   const handleNext = () => {
