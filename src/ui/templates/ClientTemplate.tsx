@@ -9,27 +9,35 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
   view,
 }) => {
   const [cardData, setCardData] = useState<Array<ICompany | IVacants>>([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchCardData = async () => {
-    try {
-      const response = await fetch(
-        view === "vacants"
+    const [loading, setLoading] = useState(true);
+  
+    const fetchCardData = async () => {
+      try {
+        const url = view === "vacants"
           ? "https://vacantsbackendgates-production.up.railway.app/api/v1/vacants"
-          : "https://vacantsbackendgates-production.up.railway.app/api/v1/company"
-      );
-      const responseData: IResponse = await response.json();
-      setCardData(responseData.content);
-    } catch (error) {
-      console.error("Error fetching data: ", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchCardData();
-  }, [view]);
+          : "https://vacantsbackendgates-production.up.railway.app/api/v1/company";
+  
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: { 'accept': '*/*' },
+        });
+  
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+  
+        const responseData: IResponse = await response.json();
+        setCardData(responseData.content);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    useEffect(() => {
+      fetchCardData();
+    }, [view]);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const totalPages = 4;
