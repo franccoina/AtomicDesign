@@ -1,5 +1,19 @@
-export interface IResponse {
-  content: IVacants[] | ICompany[]
+export interface ICompanyResponse {
+  content: ICompany[]
+  pageable: IPageable
+  totalPages: number
+  totalElements: number
+  last: boolean
+  numberOfElements: number
+  size: number
+  number: number
+  sort: ISort2
+  first: boolean
+  empty: boolean
+}
+
+export interface IVacantResponse {
+  content: IVacants[]
   pageable: IPageable
   totalPages: number
   totalElements: number
@@ -44,6 +58,20 @@ export interface ICardProps {
   $data?: IVacants | ICompany;
   isView: string
 }
+
+export interface INewVacants {
+  title: string
+  description: string
+  status: string
+  companyId: string
+}
+
+export interface INewCompany {
+  name: string
+  location: string
+  contact: string
+}
+
 export interface IPageable {
   pageNumber: number
   pageSize: number

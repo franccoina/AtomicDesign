@@ -5,6 +5,7 @@ import { GrAddCircle } from "react-icons/gr";
 import React, { useState } from "react";
 import Button from "../../atoms/Button/Button";
 import Input from "@/ui/atoms/Input/Input";
+import FormAdd from "../Form/FormAdd";
 import { IHeaderProps } from "@/models/organisms/Header";
 import Modal from "../Modals/Modals";
 
@@ -128,8 +129,11 @@ const Header: React.FC<IHeaderProps> = ({
         {showModal && (
           <ModalContainer>
             <Modal
-              isOpen={showModal} onClose={handleCloseModal} isView={isView}
-            />
+              isOpen={showModal} onClose={handleCloseModal}>
+              <FormAdd
+                isView={isView}
+              />
+            </Modal>
           </ModalContainer>
         )}
       </HeaderSection>
