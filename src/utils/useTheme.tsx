@@ -1,13 +1,13 @@
 import { GlobalTheme, GlobalDarkTheme } from "@/ui/themes/GlobalStyling";
 
 export const getTheme = (isView: string) => {
-    return isView == 'vacancies' ? GlobalDarkTheme : GlobalTheme;
+    return isView == 'vacants' ? GlobalDarkTheme : GlobalTheme;
 };
 
 export const toggleTheme = (isView: string) => {
-    if (isView == 'vacancies') {
+    if (isView == 'vacants') {
         return 'companies' ;
     }else{
-        return 'vacancies' ;
+        return 'vacants' ;
     }
 };

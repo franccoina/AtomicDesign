@@ -1,4 +1,4 @@
-import { ICompany, IVacancies, ICardProps } from "@/models/organisms/Cards";
+import { ICompany, IVacants, ICardProps } from "@/models/organisms/Cards";
 import styled from "styled-components";
 import { LuPencil, LuTrash2 } from "react-icons/lu";
 import { CardContent } from "@/ui/molecules/CardContent/CardContent";
@@ -32,11 +32,7 @@ const ButtonsContainer = styled.div`
     justify-content: end;
 `;
 
-export const Card = ({ $data }: ICardProps) => {
-    const isVacancy = ($data: IVacancies | ICompany): $data is IVacancies => {
-        return ($data as IVacancies).companyId !== undefined;
-    };
-
+export const Card = ({ $data, isView }: ICardProps) => {
     const onEdit = () => {
         // Implement edit functionality
         console.log("Edit card:", $data);
@@ -49,22 +45,26 @@ export const Card = ({ $data }: ICardProps) => {
 
     return (
         <StyledCard>
-            {$data && isVacancy($data) ? (
+            {isView == 'vacants' ? (
                 <ul>
-                    <h3>{$data.title}</h3>
+                    <h3>{($data as IVacants).title}</h3>
                     <CardContent
                         $text={[
-                            `Description: ${$data.description}`,
-                            `State: ${$data.state}`,
-                            `Company: ${$data.companyId}`,
+                            `Description: ${($data as IVacants).description}`,
+                            `State: ${($data as IVacants).status}`,
+                            `Company: ${($data as IVacants).company?.id}`,
                         ]}
                     />
                 </ul>
             ) : (
                 <ul>
-                    <h3>{$data?.name}</h3>
+                    <h3>{($data as ICompany).name}</h3>
                     <CardContent
-                        $text={[`City: ${$data?.city}`, `Contact: ${$data?.contact}`]}
+                        $text={[
+                            `City: ${($data as ICompany).location}`, 
+                            `Contact: ${($data as ICompany).contact}`,
+                            `Vacants: ${($data as ICompany).vacants?.length}`
+                        ]}
                     />
                 </ul>
             )}

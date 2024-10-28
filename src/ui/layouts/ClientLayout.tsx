@@ -8,10 +8,10 @@ import ClientTemplate from "../templates/ClientTemplate";
 
 const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [isView, setIsView] = useState("");
-    const [view, setView] = useState("vacancies");
+    const [view, setView] = useState("vacants");
 
     const handleToggle = () => {
-        setView(prev => (prev === "vacancies" ? "companies" : "vacancies"));
+        setView(prev => (prev === "vacants" ? "companies" : "vacants"));
         setIsView(prev => toggleTheme(prev)); 
     };
 

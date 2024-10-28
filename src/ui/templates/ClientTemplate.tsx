@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ICompany, IVacancies } from "@/models/organisms/Cards";
+import { ICompany, IVacants, IVacancyResponse } from "@/models/organisms/Cards";
 import { Card } from "../organisms/Cards/Cards";
 import Pagination from "../molecules/Pagination/Pagination";
 
@@ -8,18 +8,18 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
   children,
   view,
 }) => {
-  const [cardData, setCardData] = useState<Array<ICompany | IVacancies>>([]);
+  const [cardData, setCardData] = useState<Array<ICompany | IVacants>>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchCardData = async () => {
     try {
       const response = await fetch(
-        view === "vacancies"
-          ? "https://671638f633bc2bfe40bcf693.mockapi.io/api/v1/vacancies"
-          : "https://671638f633bc2bfe40bcf693.mockapi.io/api/v1/companies"
+        view === "vacants"
+          ? "https://vacantsbackendgates-production.up.railway.app/api/v1/vacants"
+          : "https://vacantsbackendgates-production.up.railway.app/api/v1/company"
       );
-      const data = await response.json();
-      setCardData(data);
+      const responseData: IResponse = await response.json();
+      setCardData(responseData.content);
     } catch (error) {
       console.error("Error fetching data: ", error);
     } finally {
@@ -56,7 +56,7 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
         <>
           <div className="cards-list">
             {cardData.map((item) => (
-              <Card $data={item} key={item.id} />
+              <Card isView={view} $data={item} key={item.id} />
             ))}
           </div>
           <Pagination

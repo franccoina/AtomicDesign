@@ -43,8 +43,8 @@ const Form: React.FC<IFormProps> = ({ onSubmit, isView }) => {
 
     return (
         <StyledForm onSubmit={handleSubmit}>
-            <StyledFormTitle>{isView === "companies" ? 'Agregar Compañia' : 'Agregar Vacante'}</StyledFormTitle>
-            {isView === "companies" ? (
+            <StyledFormTitle>{isView === "vacants" ? 'Agregar Compañia' : 'Agregar Vacante'}</StyledFormTitle>
+            {isView === "vacants" ? (
                 <>
                     <FormInput
                         text="Título" htmlFor="title" className="modal-fields" placeholder="Título" type="text"

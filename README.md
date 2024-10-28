@@ -1,9 +1,9 @@
-# Administrative Platform for Job Vacancies and Companies
+# Administrative Platform for Job Vacants and Companies
 
 -------------------------------
 
 ## Description
-We have been tasked with developing an administrative platform that allows for the management of job vacancies and companies. This platform must offer functionalities to add, edit, and delete both job vacancies and companies, with an intuitive, modular, and scalable interface.
+We have been tasked with developing an administrative platform that allows for the management of job vacants and companies. This platform must offer functionalities to add, edit, and delete both job vacants and companies, with an intuitive, modular, and scalable interface.
 
 ## Approach
 The project will be developed using Next.js and will follow the Atomic Design approach, allowing the interface to be divided into reusable and scalable components. This methodology will facilitate the maintainability and future extension of the system, ensuring that the project structure is clear and organized.
@@ -18,9 +18,9 @@ The project structure will be divided into different levels following the modula
 
 The interface will include:
 
-- Admin Panel: A panel with tabs to switch between the view of job vacancies and companies.
-- Modal Forms: Forms for adding and editing both job vacancies and companies, ensuring a smooth user experience.
-- Listings of Vacancies and Companies: Cards displaying the details of each vacancy and company, with options to edit and delete.
+- Admin Panel: A panel with tabs to switch between the view of job vacants and companies.
+- Modal Forms: Forms for adding and editing both job vacants and companies, ensuring a smooth user experience.
+- Listings of Vacants and Companies: Cards displaying the details of each vacancy and company, with options to edit and delete.
 
 ## Technologies Used
 - Next.js: A React framework for building fast and scalable web applications.
