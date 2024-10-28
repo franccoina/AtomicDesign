@@ -33,6 +33,7 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const totalPages = 4;
+  const totalPages = 4;
 
   const handleNext = () => {
     if (currentPage < totalPages) {

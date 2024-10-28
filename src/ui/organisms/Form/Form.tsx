@@ -23,8 +23,10 @@ const StyledFormTitle = styled.h2`
 interface IFormProps {
     onSubmit: (formData: { [key: string]: string }) => void;
     isView: string;
+    isView: string;
 }
 
+const Form: React.FC<IFormProps> = ({ onSubmit, isView }) => {
 const Form: React.FC<IFormProps> = ({ onSubmit, isView }) => {
     const [formData, setFormData] = useState<{ [key: string]: string }>({});
 
