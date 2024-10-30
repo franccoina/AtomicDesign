@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
+import { ITextareaProps } from '@/models/atoms/Textarea';
 
 const TextareaStyle = styled.textarea`
     width: 100%;  
@@ -17,17 +18,7 @@ const TextareaStyle = styled.textarea`
     }
 `;
 
-export interface ITextAreaProps {
-    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-    name: string;
-    placeholder?: string;
-    className?: string;
-    value?: string;
-    key?:string;
-    id?: string;
-  }
-
-const Textarea: React.FC<ITextAreaProps> = ({
+const Textarea: React.FC<ITextareaProps> = ({
     placeholder,
     value,
     name,

@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ICompany, IVacants, ICompanyResponse, IVacantResponse } from "@/models/organisms/Cards";
+import { ICompanyResponse, IVacantResponse } from "@/models/organisms/Cards";
 import { Card } from "../organisms/Cards/Cards";
 import Pagination from "../molecules/Pagination/Pagination";
 
@@ -68,11 +68,11 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
         <p>Cargando...</p>
       ) : (
         <>
-          <div className="cards-list">
+          {<div className="cards-list">
             {cardData.map((item) => (
               <Card isView={view} $data={item} key={item.id} />
             ))}
-          </div>
+          </div> || children}
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}

@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import Option from "../Option/Option";
+import { ISelectProps } from "@/models/atoms/Select";
 
 const StyledSelect = styled.select`
   border: 1px solid ${({ theme }) => theme.colors.borders};
@@ -8,20 +10,13 @@ const StyledSelect = styled.select`
   color: ${({ theme }) => theme.colors.textPrimary};
 `;
 
-export interface ISelectProps {
-  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  name: string;
-  value: string;
-  options: string[];
-}
-
 const Select: React.FC<ISelectProps> = ({ value, name, options, onChange }) => {
   return (
     <StyledSelect name={name} onChange={onChange} value={value}>
+      <Option value="" disabled placeholder="-- Elige una opción ---"></Option>
+        &&
       {options.map((option, index) => (
-        <option key={index} value={option}>
-          {option}
-        </option>
+        <Option key={index} value={option} placeholder={option}></Option>
       ))}
     </StyledSelect>
   );
