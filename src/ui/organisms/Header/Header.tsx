@@ -5,6 +5,7 @@ import { GrAddCircle } from "react-icons/gr";
 import React, { useState } from "react";
 import Button from "../../atoms/Button/Button";
 import Input from "@/ui/atoms/Input/Input";
+import FormAdd from "../Form/FormAdd";
 import { IHeaderProps } from "@/models/organisms/Header";
 import Modal from "../Modals/Modals";
 
@@ -14,7 +15,8 @@ const HeaderContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
+  margin-top: 10px;
 `;
 
 const HeaderSection = styled.div`
@@ -22,6 +24,8 @@ const HeaderSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
 `;
 
 const Toggler = styled.div<{ position: string }>`
@@ -79,8 +83,8 @@ const Header: React.FC<IHeaderProps> = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
 
-  const goLeft = isView == 'vacantes' ? '100px' : '0';
-  const goRight = isView == 'vacantes' ? '-100px' : '0';
+  const goLeft = isView == 'vacants' ? '0' : '-100px';
+  const goRight = isView == 'vacants' ? '0' : '100px';
 
   const handleCloseModal = () => {
     console.log("close");
@@ -91,21 +95,21 @@ const Header: React.FC<IHeaderProps> = ({
     <HeaderContainer>
       <HeaderSection>
         <ToggleContainer>
-          <Toggler position={goLeft}>
+          <Toggler position={goRight}>
             <Button
               className="inactiveBtn"
               type="button"
-              label={isView === "vacantes" ? 'Compañias' : 'Vacantes' }
-              icon={isView === "vacantes" ?  <LuBuilding2 /> : <LuBriefcase />}
+              label={isView === "companies" ? 'Compañias' : 'Vacantes'}
+              icon={isView === "companies" ? <LuBuilding2 /> : <LuBriefcase />}
               onClick={() => onToggleTheme()}
             />
           </Toggler>
-          <Toggler position={goRight}>
+          <Toggler position={goLeft}>
             <Button
               className="activeBtn"
               type="button"
-              label={isView === "companies" ? 'Compañias' : 'Vacantes' }
-              icon={isView === "companies" ? <LuBuilding2 /> : <LuBriefcase />}
+              label={isView === "vacants" ? 'Compañias' : 'Vacantes'}
+              icon={isView === "vacants" ? <LuBuilding2 /> : <LuBriefcase />}
               onClick={() => onToggleTheme()}
             />
           </Toggler>
@@ -115,23 +119,26 @@ const Header: React.FC<IHeaderProps> = ({
         </SearchContainer>
       </HeaderSection>
       <HeaderSection>
-          <h2>{isView === "companies" ? 'Compañias' : 'Vacantes'}</h2>
-          <AddButtonContainer>
-            <Button
-              className="activeBtn"
-              type="button"
-              label={isView === "companies" ? 'Agregar Compañia' : 'Agregar Vacante' }
-              icon={<GrAddCircle />}
-              onClick={() => setShowModal(true)}
-            />
-            </AddButtonContainer>
-            {showModal && (
-            <ModalContainer>
-              <Modal 
-              isOpen={showModal} onClose={handleCloseModal} isView={isView}
+        <h2>{isView === "vacants" ? 'Compañias' : 'Vacantes'}</h2>
+        <AddButtonContainer>
+          <Button
+            className="activeBtn"
+            type="button"
+            label={isView === "vacants" ? 'Agregar Compañia' : 'Agregar Vacante'}
+            icon={<GrAddCircle />}
+            onClick={() => setShowModal(true)}
+          />
+        </AddButtonContainer>
+        {showModal && (
+          <ModalContainer>
+            <Modal
+              isOpen={showModal} onClose={handleCloseModal}>
+              <FormAdd
+                isView={isView}
               />
-            </ModalContainer>
-          )}
+            </Modal>
+          </ModalContainer>
+        )}
       </HeaderSection>
     </HeaderContainer>
   );

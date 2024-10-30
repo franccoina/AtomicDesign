@@ -20,6 +20,7 @@ const InputStyle = styled.input`
 `;
 
 const Input: React.FC<IInputProps> = ({
+    className,
     type,
     placeholder,
     value,
@@ -31,6 +32,7 @@ const Input: React.FC<IInputProps> = ({
 }) => {
     return (
         <InputStyle
+            className={className}
             type={type}
             placeholder={placeholder}
             name={name}

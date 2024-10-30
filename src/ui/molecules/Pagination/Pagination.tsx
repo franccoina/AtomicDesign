@@ -3,6 +3,7 @@ import React from 'react';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import Button from '@/ui/atoms/Button/Button';
 import styled from 'styled-components';
+import { IPaginationProps } from '@/models/molecules/Pagination';
 
 const NavigationContainer = styled.div`
   display: flex;
@@ -11,14 +12,7 @@ const NavigationContainer = styled.div`
   gap: 16px;
 `;
 
-interface PageNavigationProps {
-    currentPage: number;
-    totalPages: number;
-    onNext: () => void;
-    onPrevious: () => void;
-}
-
-const Pagination: React.FC<PageNavigationProps> = ({
+const Pagination: React.FC<IPaginationProps> = ({
     currentPage,
     totalPages,
     onNext,

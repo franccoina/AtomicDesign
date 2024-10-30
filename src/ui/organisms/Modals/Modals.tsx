@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Button from "@/ui/atoms/Button/Button";
-import Form from "../Form/Form";
 import styled from "styled-components";
 
 const ModalOverlay = styled.div<{ isOpen: boolean }>`
@@ -25,26 +24,23 @@ const ModalContent = styled.div`
     flex-direction: column;
     align-items: end;
     justify-content: center;
+    min-width: 200px;
+    width: 100%;
+    max-width: 400px;
 `;
 
 interface ModalProps {
     isOpen: boolean;
     onClose: () => void;
-    isView: string;
+    children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, isView, onClose }) => {
-    const handleSubmit = () => {
-        console.log("submit");
-    };
-
+const Modal: React.FC<ModalProps> = ({ isOpen, children, onClose }) => {
     return (
         <ModalOverlay isOpen={isOpen}>
             <ModalContent>
                 <Button type="button" icon={"X"} onClick={onClose} />
-                <Form onSubmit={() => handleSubmit}
-                    title={isView === "companies" ? 'Agregar Compañia' : 'Agregar Vacante'}
-                />
+                {children}
             </ModalContent>
         </ModalOverlay>
     );

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import React from 'react';
+import { ITextareaProps } from '@/models/atoms/Textarea';
 
-const TextareaStyle = styled.input`
+const TextareaStyle = styled.textarea`
     width: 100%;  
     height: 80px;        
     padding: 10px;        
     border: 1px solid ${({ theme }) => theme.colors.borders};
-    border-radius: 10px;
     
     &:focus {
         outline: none;          
@@ -18,17 +18,7 @@ const TextareaStyle = styled.input`
     }
 `;
 
-export interface ITextAreaProps {
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    name: string;
-    placeholder?: string;
-    className?: string;
-    value?: string;
-    key?:string;
-    id?: string;
-  }
-
-const Textarea: React.FC<ITextAreaProps> = ({
+const Textarea: React.FC<ITextareaProps> = ({
     placeholder,
     value,
     name,

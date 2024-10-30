@@ -1,12 +1,7 @@
 import React from "react";
 import Label from "@/ui/atoms/Label/Label";
 import Textarea from "@/ui/atoms/Textarea/Textarea";
-import { ITextAreaProps } from "@/ui/atoms/Textarea/Textarea";
-import { ILabelProps } from "@/models/atoms/Label";
-
-export interface IFormTextareaProps extends ILabelProps, ITextAreaProps {
-
-}
+import { IFormTextareaProps } from "@/models/molecules/FormTextarea";
 
 const FormTextarea: React.FC<IFormTextareaProps> = ({ text, htmlFor, className, placeholder,
     key, name, value, onChange, id }) => {

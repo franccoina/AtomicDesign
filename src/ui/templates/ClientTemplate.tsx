@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ICompany, IVacancies } from "@/models/organisms/Cards";
+import { ICompanyResponse, IVacantResponse } from "@/models/organisms/Cards";
 import { Card } from "../organisms/Cards/Cards";
 import Pagination from "../molecules/Pagination/Pagination";
 
@@ -8,18 +8,35 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
   children,
   view,
 }) => {
-  const [cardData, setCardData] = useState<Array<ICompany | IVacancies>>([]);
+  const [cardData, setCardData] = useState < Array < ICompany | IVacants >> ([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchCardData = async () => {
+  const [currentPage, setCurrentPage] = useState < number > (1);
+  const [totalPages, setTotalPages] = useState < number > (1);
+
+  const fetchCardData = async (page: string) => {
     try {
-      const response = await fetch(
-        view === "vacantes"
-          ? "https://671638f633bc2bfe40bcf693.mockapi.io/api/v1/vacancies"
-          : "https://671638f633bc2bfe40bcf693.mockapi.io/api/v1/companies"
-      );
-      const data = await response.json();
-      setCardData(data);
+      const url =
+        view === "vacants"
+          ? `https://vacantsbackendgates-production.up.railway.app/api/v1/vacants?page=${page}&size=6`
+          : `https://vacantsbackendgates-production.up.railway.app/api/v1/company?page=${page}&size=6`;
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: { 'Accept': "*/*" },
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const responseData: ICompanyResponse | IVacantResponse = await response.json();
+      setCardData(responseData.content);
+
+      console.log(responseData)
+
+      const pages = responseData.totalPages;
+      setTotalPages(pages)
     } catch (error) {
       console.error("Error fetching data: ", error);
     } finally {
@@ -28,11 +45,8 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
   };
 
   useEffect(() => {
-    fetchCardData();
-  }, [view]);
-
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const totalPages = 2;
+    fetchCardData(currentPage.toString());
+  }, [view, currentPage]);
 
   const handleNext = () => {
     if (currentPage < totalPages) {
@@ -54,11 +68,11 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
         <p>Cargando...</p>
       ) : (
         <>
-          <div className="cards-list">
+          {<div className="cards-list">
             {cardData.map((item) => (
-              <Card $data={item} key={item.id} />
+              <Card isView={view} $data={item} key={item.id} />
             ))}
-          </div>
+          </div> || children}
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
