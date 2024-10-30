@@ -15,7 +15,8 @@ const HeaderContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
+  margin-top: 10px;
 `;
 
 const HeaderSection = styled.div`
@@ -23,6 +24,8 @@ const HeaderSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
 `;
 
 const Toggler = styled.div<{ position: string }>`

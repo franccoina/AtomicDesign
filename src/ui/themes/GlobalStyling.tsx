@@ -91,8 +91,10 @@ export const GlobalStyle = createGlobalStyle`
     --borders: ${({ theme }) => theme.colors.borders};
 }
 
-input, select, textarea, button {
-    font-size: 14px;
+* {
     font-family: ${urbanist.style.fontFamily};
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 `;

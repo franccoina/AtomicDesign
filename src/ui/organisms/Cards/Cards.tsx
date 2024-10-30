@@ -14,8 +14,8 @@ const StyledCard = styled.div`
     width: 32%;
     max-width: 400px;
     min-width: 150px;
-    height: 150px;
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
+    height: 160px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
     margin: 0;
     background-color: ${({ theme }) => theme.colors.bgPrimary};
     

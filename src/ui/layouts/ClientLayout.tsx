@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Header from "../organisms/Header/Header";
 import { getTheme, toggleTheme } from "@/utils/useTheme";
 import ClientTemplate from "../templates/ClientTemplate";
+import Pagination from "../molecules/Pagination/Pagination";
 
 const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [isView, setIsView] = useState("");
