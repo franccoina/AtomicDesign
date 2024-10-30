@@ -113,7 +113,7 @@ const FormAdd: React.FC<IFormProps> = ({ isView }) => {
                 contact: ''
             });
 
-            const res = await fetch("https://vacantsbackendgates-production.up.railway.app/api/v1/company", {
+            const res = await fetch(`https://vacantsbackendgates-production.up.railway.app/api/v1/company?size=10`, {
                 method: "GET",
                 headers: { 'Accept': "*/*" },
             });
@@ -139,7 +139,7 @@ const FormAdd: React.FC<IFormProps> = ({ isView }) => {
                         text="Descripción" htmlFor="description" className="modal-fields" placeholder="Descripción"
                         name="description" value={formData.description} onChange={handleChange} />
                     <FormSelect
-                        text="Estado" htmlFor="status" className="modal-fields" options={['OPEN', 'CLOSE']}
+                        text="Estado" htmlFor="status" className="modal-fields" options={['ACTIVE', 'INACTIVE']}
                         name="status" value={formData.status} onChange={handleChange} />
                     <FormSelect
                         text="Compañía" htmlFor="companyId" className="modal-fields" options={companiesId}
