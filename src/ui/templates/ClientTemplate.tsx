@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { ICompany, IVacants } from "@/models/organisms/Cards";
-import { ICompanyResponse, IVacantResponse } from "@/models/organisms/Cards";
+import React, { useEffect, useState, useCallback } from "react";
+import { ICompany, IVacants, ICompanyResponse, IVacantResponse } from "@/models/organisms/Cards";
 import { Card } from "../organisms/Cards/Cards";
 import Pagination from "../molecules/Pagination/Pagination";
 
@@ -11,11 +10,11 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; isView: string }> = 
 }) => {
   const [cardData, setCardData] = useState<Array<ICompany | IVacants>>([]);
   const [loading, setLoading] = useState(true);
-
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
 
-  const fetchCardData = async (page: string) => {
+  const fetchCardData = useCallback(async (page: string) => {
+    setLoading(true);
     try {
       const url =
         isView === "vacants"
@@ -33,21 +32,20 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; isView: string }> = 
 
       const responseData: ICompanyResponse | IVacantResponse = await response.json();
       setCardData(responseData.content);
-
-      console.log(responseData)
+      console.log(responseData);
 
       const pages = responseData.totalPages;
-      setTotalPages(pages)
+      setTotalPages(pages);
     } catch (error) {
       console.error("Error fetching data: ", error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [isView]);
 
   useEffect(() => {
     fetchCardData(currentPage.toString());
-  }, [isView, currentPage]);
+  }, [currentPage, fetchCardData]);
 
   const handleNext = () => {
     if (currentPage < totalPages) {
@@ -67,13 +65,11 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; isView: string }> = 
         <p>Cargando...</p>
       ) : (
         <>
-          {
-            <div className="cards-list">
-              {cardData.map((item) => (
-                <Card isView={isView} $data={item} key={item.id} />
-              ))}
-            </div>
-          }
+          <div className="cards-list">
+            {cardData.map((item) => (
+              <Card isView={isView} $data={item} key={item.id} />
+            ))}
+          </div>
           {children}
           <Pagination
             currentPage={currentPage}
