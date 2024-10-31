@@ -60,29 +60,28 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
     }
   };
 
-  console.log(view, cardData);
-
-  return (
-    <main className="template">
-      {loading ? (
-        <p>Cargando...</p>
-      ) : (
-        <>
-          {<div className="cards-list">
-            {cardData.map((item) => (
-              <Card isView={view} $data={item} key={item.id} />
-            ))}
-          </div> || children}
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-          />
-        </>
-      )}
-    </main>
-  );
+return (
+  <main className="template">
+    {loading ? (
+      <p>Cargando...</p>
+    ) : (
+      <>
+        {<div className="cards-list">
+          {cardData.map((item) => (
+            <Card isView={view} $data={item} key={item.id} />
+          ))}
+        </div> || children}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onNext={handleNext}
+          onPrevious={handlePrevious}
+        />
+      </>
+    )}
+  </main>
+);
 };
 
 export default ClientTemplate;
+
