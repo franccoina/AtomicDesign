@@ -35,12 +35,35 @@ const ButtonsContainer = styled.div`
 export const Card = ({ $data, isView }: ICardProps) => {
     const onEdit = () => {
         // Implement edit functionality
-        console.log("Edit card:", $data);
+        console.log("Edit card:");
     };
 
-    const onDelete = () => {
+    const onDelete = async (idToDelete: number | string) => {
         // Implement delete functionality
-        console.log("Delete card:", $data);
+        console.log("Delete card:", idToDelete);
+
+        const id: string = idToDelete.toString()
+
+        try {
+            const url =
+                isView === "companies"
+                    ? `https://vacantsbackendgates-production.up.railway.app/api/v1/company/${id}`
+                    : `https://vacantsbackendgates-production.up.railway.app/api/v1/vacants/${id}`;
+
+            const response = await fetch(url, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': "*/*"
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     return (
@@ -61,7 +84,7 @@ export const Card = ({ $data, isView }: ICardProps) => {
                     <h3>{($data as ICompany).name}</h3>
                     <CardContent
                         $text={[
-                            `City: ${($data as ICompany).location}`, 
+                            `City: ${($data as ICompany).location}`,
                             `Contact: ${($data as ICompany).contact}`,
                             `Vacants: ${($data as ICompany).vacants?.length}`
                         ]}
@@ -69,18 +92,22 @@ export const Card = ({ $data, isView }: ICardProps) => {
                 </ul>
             )}
             <ButtonsContainer>
-                <Button
-                    className="editBtn"
-                    type="button"
-                    icon={<LuPencil />}
-                    onClick={() => onEdit()}
-                />
-                <Button
-                    className="deleteBtn"
-                    type="button"
-                    icon={<LuTrash2 />}
-                    onClick={() => onDelete()}
-                />
+                <div                         className="editBtn"
+                >
+                    <Button
+                        type="button"
+                        icon={<LuPencil />}
+                        onClick={onEdit}
+                    />
+                </div>
+                <div                         className="deleteBtn">
+                    <Button
+
+                        type="button"
+                        icon={<LuTrash2 />}
+                        onClick={() => onDelete($data!.id)}
+                    />
+                </div>
             </ButtonsContainer>
         </StyledCard>
     );

@@ -25,9 +25,10 @@ export const GlobalTheme: IGlobalTheme = {
         bgSecondary: 'rgb(255, 255, 255)',
         textSecondary: 'rgb(255, 255, 255)',
         textTertiary: 'rgb(239, 68, 68)',
-        hoverTertiary: 'rgb(219, 39, 119)',
+        hoverBgTertiary: 'rgb(219, 39, 119)',
         textQuaternary: 'rgb(168, 85, 247)',
-        hoverQuaternary: ' rgb(147, 51, 234)',
+        hoverTextQuaternary: ' rgb(147, 51, 234)',
+        hoverBgQuaternary: 'rgb(245, 234, 255)',
         textQuinary: 'rgb(239, 68, 68)',
         hoverTextQuinary: ' rgb(220, 38, 38)',
         hoverBgQuinary: 'rgb(254, 242, 242)',
@@ -48,9 +49,10 @@ export const GlobalDarkTheme: IGlobalTheme = {
         bgSecondary: 'rgb(255, 255, 255)',
         textSecondary: 'rgb(255, 255, 255)',
         textTertiary: 'rgb(239, 68, 68)',
-        hoverTertiary: 'rgb(219, 39, 119)',
+        hoverBgTertiary: 'rgb(219, 39, 119)',
         textQuaternary: 'rgb(168, 85, 247)',
-        hoverQuaternary: ' rgb(147, 51, 234)',
+        hoverTextQuaternary: ' rgb(147, 51, 234)',
+        hoverBgQuaternary: 'rgb(245, 234, 255)',
         textQuinary: 'rgb(239, 68, 68)',
         hoverTextQuinary: ' rgb(220, 38, 38)',
         hoverBgQuinary: 'rgb(254, 242, 242)',
@@ -79,10 +81,11 @@ export const GlobalStyle = createGlobalStyle`
     --bgPagination: ${({ theme }) => theme.colors.bgPagination};
 
     --textTertiary: ${({ theme }) => theme.colors.textTertiary};
-    --hoverTertiary: ${({ theme }) => theme.colors.hoverTertiary};
+    --hoverBgTertiary: ${({ theme }) => theme.colors.hoverBgTertiary};
 
     --textQuaternary: ${({ theme }) => theme.colors.textQuaternary};
-    --hoverQuaternary: ${({ theme }) => theme.colors.hoverQuaternary};
+    --hoverTextQuaternary: ${({ theme }) => theme.colors.hoverTextQuaternary};
+    --hoverBgQuaternary: ${({ theme }) => theme.colors.hoverBgQuaternary};
     
     --textQuinary: ${({ theme }) => theme.colors.textQuinary};
     --hoverTextQuinary: ${({ theme }) => theme.colors.hoverTextQuinary};
