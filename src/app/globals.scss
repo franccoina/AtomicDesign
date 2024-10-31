@@ -24,6 +24,10 @@ h6 {
   font-weight: bolder;
 }
 
+h1{
+  font-size: 20px;
+}
+
 p, li, label, select, input, textarea{
   color: var(--textPrimary);
   line-height: 1.5;
@@ -99,10 +103,41 @@ p, li, label, select, input, textarea{
   border-radius: 10px;
   width: 30px;
   height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   :hover {
     color: var(--hoverTextQuinary);
     background: var(--hoverBgQuinary);
+  }
+
+  & button{
+    border-radius: 10px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.editBtn {
+  color: var(--textQuaternary);
+  border: 1px solid var(--borders);
+  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  :hover {
+    color: var(--hoverTextQuaternary);
+    background: var(--hoverBgQuaternary);
+  }
+
+  & button{
+    border-radius: 10px;
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -123,18 +158,6 @@ p, li, label, select, input, textarea{
 
 .search-input{
   border-radius: 50px;
-}
-
-.editBtn {
-  color: var(--textQuaternary);
-  border: 1px solid var(--borders);
-  border-radius: 10px;
-  width: 30px;
-  height: 30px;
-
-  :hover {
-    color: var(--hoverQuaternary);
-  }
 }
 
 .paginationBtn{
