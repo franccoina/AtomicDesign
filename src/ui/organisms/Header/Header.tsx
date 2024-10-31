@@ -2,12 +2,12 @@
 import styled from "styled-components";
 import { LuBriefcase, LuBuilding2 } from "react-icons/lu";
 import { GrAddCircle } from "react-icons/gr";
-import React, { useState } from "react";
+import React from "react";
 import Button from "../../atoms/Button/Button";
 import Input from "@/ui/atoms/Input/Input";
 import FormAdd from "../Form/FormAdd";
 import { IHeaderProps } from "@/models/organisms/Header";
-import Modal from "../Modals/Modals";
+import { useModalContext } from "@/ui/contexts/ModalContext";
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -66,30 +66,25 @@ const AddButtonContainer = styled.div`
   justify-content: start;
 `;
 
-const ModalContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-`;
-
 const Header: React.FC<IHeaderProps> = ({
   onToggleTheme,
   isView,
 }) => {
-  const [showModal, setShowModal] = useState(false);
+  const { openModal, setModalContent } = useModalContext();
+
+  const handleModal = () => {
+    setModalContent(
+      (
+          <FormAdd
+            isView={isView}
+          />
+      )
+    );
+    openModal()
+  }
 
   const goLeft = isView == 'vacants' ? '0' : '-100px';
   const goRight = isView == 'vacants' ? '0' : '100px';
-
-  const handleCloseModal = () => {
-    console.log("close");
-    setShowModal(false);
-  };
 
   return (
     <HeaderContainer>
@@ -126,19 +121,9 @@ const Header: React.FC<IHeaderProps> = ({
             type="button"
             label={isView === "vacants" ? 'Agregar Compañia' : 'Agregar Vacante'}
             icon={<GrAddCircle />}
-            onClick={() => setShowModal(true)}
+            onClick={handleModal}
           />
         </AddButtonContainer>
-        {showModal && (
-          <ModalContainer>
-            <Modal
-              isOpen={showModal} onClose={handleCloseModal}>
-              <FormAdd
-                isView={isView}
-              />
-            </Modal>
-          </ModalContainer>
-        )}
       </HeaderSection>
     </HeaderContainer>
   );

@@ -5,6 +5,7 @@ import FormSelect from '@/ui/molecules/FormSelect/FormSelect';
 import FormTextarea from '@/ui/molecules/FormTextarea/FormTextarea';
 import FormInput from '@/ui/molecules/FormInput/FormInput';
 import { ICompany, INewCompany, INewVacants, ICompanyResponse } from '@/models/organisms/Cards';
+import { toast } from 'react-toastify';
 
 const StyledForm = styled.form`
     display: flex;
@@ -33,8 +34,29 @@ const FormAdd: React.FC<IFormProps> = ({ isView }) => {
         location: '',
         contact: ''
     });
-    
+
     const [cardData, setCardData] = useState<Array<ICompany>>([]);
+
+    const isPost = () => {
+        if (isView === "companies") {
+            const data: INewVacants = {
+                title: formData.title,
+                description: formData.description,
+                status: formData.status,
+                companyId: formData.companyId
+            };
+            const url = "https://vacantsbackendgates-production.up.railway.app/api/v1/vacants";
+            return { url, data };
+        } else {
+            const data: INewCompany = {
+                name: formData.name,
+                location: formData.location,
+                contact: formData.contact,
+            };
+            const url = "https://vacantsbackendgates-production.up.railway.app/api/v1/company";
+            return { url, data };
+        }
+    };
 
     useEffect(() => {
         const fetchCompanies = async () => {
@@ -63,40 +85,16 @@ const FormAdd: React.FC<IFormProps> = ({ isView }) => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-        const newVacant: INewVacants = {
-            title: formData.title,
-            description: formData.description,
-            status: formData.status,
-            companyId: formData.companyId,
-        };
-
-        const newCompany: INewCompany = {
-            name: formData.name,
-            location: formData.location,
-            contact: formData.contact,
-        };
+        const toPost = isPost(); 
 
         try {
-            const url =
-                isView === "companies"
-                    ? "https://vacantsbackendgates-production.up.railway.app/api/v1/vacants"
-                    : "https://vacantsbackendgates-production.up.railway.app/api/v1/company";
-
-            const dataToAdd =
-                isView === "companies"
-                    ? newVacant
-                    : newCompany;
-
-                    console.log(dataToAdd);
-
-            const response = await fetch(url, {
+            const response = await fetch(toPost.url, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': "*/*"
                 },
-                body: JSON.stringify(dataToAdd),
+                body: JSON.stringify(toPost.data),
             });
 
             if (!response.ok) {
@@ -113,15 +111,18 @@ const FormAdd: React.FC<IFormProps> = ({ isView }) => {
                 contact: ''
             });
 
-            const res = await fetch(`https://vacantsbackendgates-production.up.railway.app/api/v1/company?size=10`, {
+            const res = await fetch("https://vacantsbackendgates-production.up.railway.app/api/v1/company?size=10", {
                 method: "GET",
                 headers: { 'Accept': "*/*" },
             });
 
             const responseData: ICompanyResponse = await res.json();
             setCardData(responseData.content);
+
+            toast.success("¡Felicidades! Has añadido un nuevo elemento con éxito.")
         } catch (err) {
             console.error(err);
+            toast.error("¡Oops! El elemento ingresado no se pudo añadir.")
         }
     };
 

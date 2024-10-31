@@ -5,31 +5,36 @@ import React, { useState } from "react";
 import Header from "../organisms/Header/Header";
 import { getTheme, toggleTheme } from "@/utils/useTheme";
 import ClientTemplate from "../templates/ClientTemplate";
+import { ModalProvider } from "../contexts/ModalContext";
+import Modal from "../organisms/Modals/Modals";
 
 const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [isView, setIsView] = useState("");
+    const [isView, setIsView] = useState("companies");
     const [view, setView] = useState("vacants");
+
+    const theme = getTheme(isView);
 
     const handleToggle = () => {
         setView(prev => (prev === "vacants" ? "companies" : "vacants"));
-        setIsView(prev => toggleTheme(prev)); 
+        setIsView(prev => toggleTheme(prev));
     };
 
-    const theme = getTheme(isView);
-    
     return (
         <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <div className="layout">
-                <h1>Panel de Administración</h1>
-                <Header 
-                    onToggleTheme={handleToggle}
-                    isView={isView} 
-                />
-                <ClientTemplate view={view}>
-                    {children}
-                </ClientTemplate>
-            </div>
+            <ModalProvider>
+                <GlobalStyle />
+                <div className="layout">
+                    <h1>Panel de Administración</h1>
+                    <Header
+                        onToggleTheme={handleToggle}
+                        isView={isView}
+                    />
+                    <ClientTemplate isView={view}>
+                        {children}
+                    </ClientTemplate>
+                </div>
+                <Modal />
+            </ModalProvider>
         </ThemeProvider>
     );
 };
