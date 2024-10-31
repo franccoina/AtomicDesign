@@ -1,23 +1,24 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { ICompany, IVacants } from "@/models/organisms/Cards";
 import { ICompanyResponse, IVacantResponse } from "@/models/organisms/Cards";
 import { Card } from "../organisms/Cards/Cards";
 import Pagination from "../molecules/Pagination/Pagination";
 
-const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
+const ClientTemplate: React.FC<{ children: React.ReactNode; isView: string }> = ({
   children,
-  view,
+  isView,
 }) => {
-  const [cardData, setCardData] = useState < Array < ICompany | IVacants >> ([]);
+  const [cardData, setCardData] = useState<Array<ICompany | IVacants>>([]);
   const [loading, setLoading] = useState(true);
 
-  const [currentPage, setCurrentPage] = useState < number > (1);
-  const [totalPages, setTotalPages] = useState < number > (1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
 
   const fetchCardData = async (page: string) => {
     try {
       const url =
-        view === "vacants"
+        isView === "vacants"
           ? `https://vacantsbackendgates-production.up.railway.app/api/v1/vacants?page=${page}&size=6`
           : `https://vacantsbackendgates-production.up.railway.app/api/v1/company?page=${page}&size=6`;
 
@@ -46,7 +47,7 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
 
   useEffect(() => {
     fetchCardData(currentPage.toString());
-  }, [view, currentPage]);
+  }, [isView, currentPage]);
 
   const handleNext = () => {
     if (currentPage < totalPages) {
@@ -60,27 +61,30 @@ const ClientTemplate: React.FC<{ children: React.ReactNode; view: string }> = ({
     }
   };
 
-return (
-  <main className="template">
-    {loading ? (
-      <p>Cargando...</p>
-    ) : (
-      <>
-        {<div className="cards-list">
-          {cardData.map((item) => (
-            <Card isView={view} $data={item} key={item.id} />
-          ))}
-        </div> || children}
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onNext={handleNext}
-          onPrevious={handlePrevious}
-        />
-      </>
-    )}
-  </main>
-);
+  return (
+    <main className="template">
+      {loading ? (
+        <p>Cargando...</p>
+      ) : (
+        <>
+          {
+            <div className="cards-list">
+              {cardData.map((item) => (
+                <Card isView={isView} $data={item} key={item.id} />
+              ))}
+            </div>
+          }
+          {children}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onNext={handleNext}
+            onPrevious={handlePrevious}
+          />
+        </>
+      )}
+    </main>
+  );
 };
 
 export default ClientTemplate;

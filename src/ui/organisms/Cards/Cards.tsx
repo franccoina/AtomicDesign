@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { LuPencil, LuTrash2 } from "react-icons/lu";
 import { CardContent } from "@/ui/molecules/CardContent/CardContent";
 import Button from "@/ui/atoms/Button/Button";
+import FormEdit from "../Form/FormEdit";
+import { FormEditProvider } from "@/ui/contexts/FormEditContext";
+import { useModalContext } from "@/ui/contexts/ModalContext";
 
 const StyledCard = styled.div`
     display: flex;
@@ -33,22 +36,25 @@ const ButtonsContainer = styled.div`
 `;
 
 export const Card = ({ $data, isView }: ICardProps) => {
-    const onEdit = () => {
-        // Implement edit functionality
-        console.log("Edit card:");
-    };
+    const { openModal, setModalContent } = useModalContext();
+
+    const handleModal = (dataToEdit: string | number) => {
+        const id: string = dataToEdit.toString()
+
+        setModalContent(
+            (<FormEditProvider>
+                <FormEdit isView={isView} idToEdit={id} />
+            </FormEditProvider>)
+        );
+        openModal()
+    }
 
     const onDelete = async (idToDelete: number | string) => {
-        // Implement delete functionality
-        console.log("Delete card:", idToDelete);
-
-        const id: string = idToDelete.toString()
-
+        const id: string = idToDelete.toString();
         try {
-            const url =
-                isView === "companies"
-                    ? `https://vacantsbackendgates-production.up.railway.app/api/v1/company/${id}`
-                    : `https://vacantsbackendgates-production.up.railway.app/api/v1/vacants/${id}`;
+            const url = isView === "companies"
+                ? `https://vacantsbackendgates-production.up.railway.app/api/v1/company/${id}`
+                : `https://vacantsbackendgates-production.up.railway.app/api/v1/vacants/${id}`;
 
             const response = await fetch(url, {
                 method: "DELETE",
@@ -61,6 +67,8 @@ export const Card = ({ $data, isView }: ICardProps) => {
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
+
+            console.log("Deleted card:", idToDelete);
         } catch (err) {
             console.error(err);
         }
@@ -92,17 +100,15 @@ export const Card = ({ $data, isView }: ICardProps) => {
                 </ul>
             )}
             <ButtonsContainer>
-                <div                         className="editBtn"
-                >
+                <div className="editBtn">
                     <Button
                         type="button"
                         icon={<LuPencil />}
-                        onClick={onEdit}
+                        onClick={() => handleModal($data!.id)}
                     />
                 </div>
-                <div                         className="deleteBtn">
+                <div className="deleteBtn">
                     <Button
-
                         type="button"
                         icon={<LuTrash2 />}
                         onClick={() => onDelete($data!.id)}

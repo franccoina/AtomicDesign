@@ -2,6 +2,8 @@
 import React from "react";
 import Button from "@/ui/atoms/Button/Button";
 import styled from "styled-components";
+import { useModalContext } from "@/ui/contexts/ModalContext";
+import ModalContent from "@/ui/molecules/ModalContent/ModalContent";
 
 const ModalOverlay = styled.div<{ isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
@@ -16,33 +18,18 @@ const ModalOverlay = styled.div<{ isOpen: boolean }>`
   z-index: 1000; 
 `;
 
-const ModalContent = styled.div`
-    background-color:  ${({ theme }) => theme.colors.bgSecondary};
-    border-radius: 10px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    justify-content: center;
-    min-width: 200px;
-    width: 100%;
-    max-width: 400px;
-`;
+const Modal: React.FC = () => {
+    const {isOpen, onClose, modalContent} = useModalContext();
 
-interface ModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    children: React.ReactNode;
-}
+    if (!isOpen) return null
 
-const Modal: React.FC<ModalProps> = ({ isOpen, children, onClose }) => {
     return (
-        <ModalOverlay isOpen={isOpen}>
-            <ModalContent>
-                <Button type="button" icon={"X"} onClick={onClose} />
-                {children}
-            </ModalContent>
-        </ModalOverlay>
+            <ModalOverlay isOpen={isOpen}>
+                <ModalContent>
+                    <Button type="button" icon={"X"} onClick={onClose} />
+                    {modalContent}
+                </ModalContent>
+            </ModalOverlay>
     );
 };
 
